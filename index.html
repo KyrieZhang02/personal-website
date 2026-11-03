@@ -1584,6 +1584,8 @@
                     "degree": "Grades 11–12",
                     "startDate": "2025-09",
                     "endDate": null,
+                    "expectedEndDate": "2027-06",
+                    "endEvent": "Expected graduation",
                     "period": "September 2025–Present",
                     "description": "Wilbraham, Massachusetts."
                 },
@@ -1592,6 +1594,7 @@
                     "degree": "Grades 9–10",
                     "startDate": "2024-01",
                     "endDate": "2025-05",
+                    "endEvent": "Transferred",
                     "period": "January 2024–May 2025",
                     "description": "Malden, Massachusetts."
                 },
@@ -1600,6 +1603,7 @@
                     "degree": "Grade 9",
                     "startDate": "2022-09",
                     "endDate": "2023-06",
+                    "endEvent": "Graduated",
                     "period": "September 2022–June 2023",
                     "description": "Zhuji, Zhejiang, China."
                 }
@@ -2802,14 +2806,24 @@
         
         // 修改时间线渲染代码
         const timelineItems = [
-            ...profile.education.map(item => ({
-                type: 'education',
-                title: item.school,
-                subtitle: item.degree,
-                period: item.period,
-                description: item.description,
-                date: item.startDate
-            })),
+            ...profile.education.flatMap(item => [
+                {
+                    type: 'education',
+                    title: item.school,
+                    subtitle: item.degree,
+                    period: 'Enrolled',
+                    description: item.description,
+                    date: item.startDate
+                },
+                {
+                    type: 'education',
+                    title: item.school,
+                    subtitle: item.degree,
+                    period: item.endEvent || 'Completed studies',
+                    description: item.description,
+                    date: item.endDate || item.expectedEndDate
+                }
+            ]),
             ...profile.summerPrograms.map(item => ({
                 type: 'summer',
                 title: item.name,
