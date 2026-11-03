@@ -296,6 +296,10 @@
             transform: scale(1.05);
         }
 
+        .gallery-item:hover .gallery-image-contain {
+            transform: none;
+        }
+
         .gallery-content {
             position: absolute;
             bottom: 0;
@@ -1513,27 +1517,67 @@
                             "weight": 5
                         },
                         {
-                            "name": "AI",
-                            "weight": 5
-                        },
-                        {
-                            "name": "Robotics",
-                            "weight": 5
-                        },
-                        {
-                            "name": "Jazz",
-                            "weight": 3
-                        },
-                        {
-                            "name": "Basketball",
-                            "weight": 3
-                        },
-                        {
                             "name": "NFT",
+                            "weight": 4
+                        },
+                        {
+                            "name": "AI",
                             "weight": 3
+                        },
+                        {
+                            "name": "programming",
+                            "weight": 4
+                        },
+                        {
+                            "name": "Vinyl Records",
+                            "weight": 2
+                        },
+                        {
+                            "name": "Film Photography",
+                            "weight": 2
                         },
                         {
                             "name": "Sports Card Collection",
+                            "weight": 2
+                        },
+                        {
+                            "name": "Basketball",
+                            "weight": 2
+                        },
+                        {
+                            "name": "GYM",
+                            "weight": 2
+                        },
+                        {
+                            "name": "saxophone",
+                            "weight": 2
+                        },
+                        {
+                            "name": "Robotics",
+                            "weight": 2
+                        },
+                        {
+                            "name": "painting",
+                            "weight": 2
+                        },
+                        {
+                            "name": "Customized Keyboard",
+                            "weight": 2
+                        },
+                        {
+                            "name": "Jazz",
+                            "weight": 2
+                        },
+                        {
+                            "name": "Pickleball",
+                            "weight": 2
+                        },
+                        {
+                            "name": "Clash Royale",
+                            "weight": 2
+                        },
+                        {
+                            "name": "NBA 2K",
                             "weight": 2
                         }
                     ],
@@ -1646,17 +1690,31 @@
                     "post": "### A global photography community\nFounded and organized FRAME!, and built its website. The contest attracted **700+ participants** and **2,800+ entries**.\n\n[Visit FRAME!](https://frame.7nft.art/)"
                 },
                 {
-                    "name": "Film Roll Archive & AI Vocabulary App",
+                    "name": "Film Roll Archive",
                     "role": "App Developer & Product Designer",
                     "period": "Grade 12",
-                    "description": "Built two Swift apps and fine-tuned a local model on 11,712 examples for typed recall. Film Roll Archive was submitted for App Store review.",
-                    "coverLabel": "Swift Apps",
+                    "description": "A Swift app for browsing and organizing film scans by roll or across an entire photo library. Submitted for App Store review.",
+                    "image": "images/film-roll-archive-showcase.png",
+                    "imageFit": "contain",
+                    "tags": [
+                        "Swift",
+                        "Film Photography",
+                        "Product Design"
+                    ],
+                    "post": "### Film Roll Archive\nBuilt **Film Roll Archive** in Swift to browse and organize film scans.\n\n- Open a film library and scan its subfolders.\n- Browse all photos or choose an individual roll.\n- View image previews alongside roll names, frame numbers, and filenames.\n\nThe app has been submitted for **App Store review**.\n\n### App showcase\n![Film Roll Archive showing its film library and photo grid](images/film-roll-archive-showcase.png)"
+                },
+                {
+                    "name": "AI Vocabulary App",
+                    "role": "App Developer & Product Designer",
+                    "period": "Grade 12",
+                    "description": "Built a Swift vocabulary app and fine-tuned a local model on 11,712 examples for typed recall.",
+                    "coverLabel": "AI Vocabulary",
                     "tags": [
                         "Swift",
                         "AI",
                         "Product Design"
                     ],
-                    "post": "### Independent app development\n- Built **Film Roll Archive** and an **AI vocabulary app** in Swift.\n- Fine-tuned a local model on **11,712 examples** for typed recall.\n- Submitted the film app for App Store review."
+                    "post": "### AI vocabulary learning\nBuilt an **AI vocabulary app** in Swift and fine-tuned a local model on **11,712 examples** for typed recall."
                 },
                 {
                     "name": "AI To-Do List App",
@@ -1684,7 +1742,7 @@
                         "Wiki",
                         "Science Communication"
                     ],
-                    "post": "### iGEM 2025\nAs Dry Team Leader, coordinated team members and completed the team wiki content, team video, and Giant Jamboree presentation. Represented the team at the final competition in **Paris**.\n\nThe team received a **Gold Medal** in October 2025."
+                    "post": "### iGEM 2025\nAs Dry Team Leader, coordinated team members and completed the team wiki content, team video, and Giant Jamboree presentation. Represented the team at the final competition in **Paris**.\n\nThe team received a **Gold Medal** in October 2025.\n\n[View our iGEM 2025 Team Wiki](https://2025.igem.wiki/subcat-shanghai/index.html)\n\n[View the original certificate PDF](images/igem-2025-jiale-zhang.pdf)"
                 },
                 {
                     "name": "Sun and Ocean",
@@ -1720,7 +1778,8 @@
                     "achievement": "Gold Medal",
                     "period": "October 2025",
                     "date": "2025-10",
-                    "description": "Earned a Gold Medal as part of the iGEM team; served as Dry Team Leader and represented the team at the final competition in Paris."
+                    "description": "Earned a Gold Medal as part of the iGEM team; served as Dry Team Leader and represented the team at the final competition in Paris.",
+                    "post": "### iGEM 2025 Gold Medal\nThe **SubCat-Shanghai** team earned a **Gold Medal** in the High School Section of the 2025 iGEM Competition. The official certificate recognizes **Jiale Zhang** as a **student leader**.\n\n![Jiale Zhang’s official iGEM 2025 certificate](images/igem-2025-certificate.png)\n\n[View the original certificate PDF](images/igem-2025-jiale-zhang.pdf)\n\n[View our iGEM 2025 Team Wiki](https://2025.igem.wiki/subcat-shanghai/index.html)"
                 },
                 {
                     "name": "Columbia Model Entrepreneur Competition (MEC)",
@@ -1850,6 +1909,21 @@
                 }
             ],
             "certificates": [
+                {
+                    "name": "iGEM 2025 Official Certificate",
+                    "description": "Jiale Zhang · Student Leader · SubCat-Shanghai. Team awarded a Gold Medal in the High School Section.",
+                    "image": "images/igem-2025-certificate.png",
+                    "imageFit": "contain",
+                    "date": "2025-10",
+                    "period": "October 28–31, 2025",
+                    "organization": "iGEM Foundation",
+                    "tags": [
+                        "iGEM 2025",
+                        "Gold Medal",
+                        "Student Leader"
+                    ],
+                    "post": "### Official iGEM certificate\nPresented to **Jiale Zhang** for participation in the **2025 iGEM Competition, High School Section**, as a **student leader** for **SubCat-Shanghai**. The team was awarded a **Gold Medal**.\n\nGrand Jamboree · October 28–31, 2025 · Paris Convention Center, Paris.\n\n![Jiale Zhang’s official iGEM 2025 certificate](images/igem-2025-certificate.png)\n\n[View the original certificate PDF](images/igem-2025-jiale-zhang.pdf)\n\n[View our iGEM 2025 Team Wiki](https://2025.igem.wiki/subcat-shanghai/index.html)"
+                },
                 {
                     "name": "Conrad Challenge: AquaNova",
                     "description": "Participation certificate for the AquaNova project.",
@@ -3394,7 +3468,7 @@
             
             projectElement.innerHTML = `
                 ${project.image
-                    ? `<img src="${project.image}" alt="${project.name}" class="gallery-image">`
+                    ? `<img src="${project.image}" alt="${project.name}" class="gallery-image${project.imageFit === 'contain' ? ' gallery-image-contain' : ''}" style="object-fit: ${project.imageFit || 'cover'}">`
                     : `<div class="project-cover" aria-hidden="true">${project.coverLabel || project.name}</div>`}
                 <div class="gallery-content">
                     <h3 class="gallery-title">${project.name}</h3>
@@ -3582,7 +3656,7 @@
             certificateElement.style.animationDelay = `${index * 0.2}s`;
             
             certificateElement.innerHTML = `
-                <img src="${certificate.image}" alt="${certificate.name}" class="gallery-image">
+                <img src="${certificate.image}" alt="${certificate.name}" class="gallery-image${certificate.imageFit === 'contain' ? ' gallery-image-contain' : ''}" style="object-fit: ${certificate.imageFit || 'cover'}">
                 <div class="gallery-content">
                     <h3 class="gallery-title">${certificate.name}</h3>
                     <p class="gallery-description">${certificate.description}</p>
