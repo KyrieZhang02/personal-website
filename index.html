@@ -1953,26 +1953,9 @@
 
 
     <style>
-        .project-cover {
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            padding: 5rem 2rem 2rem;
-            color: #fdba74;
-            font: 600 clamp(1.8rem, 5vw, 3.5rem) monospace;
-            letter-spacing: -0.04em;
-            background: radial-gradient(ellipse at top right, #78350f 0%, #292524 45%, #171717 80%);
-        }
-        .no-image .gallery-content,
-        .no-image .gallery-title,
-        .no-image .gallery-description,
-        .no-image .gallery-tags {
-            transform: none;
-            opacity: 1;
-        }
         .gallery-item:focus-visible { outline: 2px solid #fb923c; outline-offset: -3px; }
+        .project-text-card { cursor: pointer; }
+        .project-text-card:focus-visible { outline: 2px solid #fb923c; outline-offset: 3px; }
         #email { overflow-wrap: anywhere; }
         #title { min-height: 3.5rem; text-align: center; }
         .card-header > div { min-width: 0; }
@@ -2094,6 +2077,7 @@
                             <div class="gallery-container">
                                 <!-- Project items will be added here -->
                             </div>
+                            <div id="project-cards" class="space-y-4 mt-6"></div>
                         </section>
 
                         <!-- Competition Section -->
@@ -3426,6 +3410,8 @@
         });
 
         // 渲染项目画廊
+        const galleryProjects = profile.projects.filter(project => project.image);
+        const textProjects = profile.projects.filter(project => !project.image);
         const projectSection = document.querySelector('#project-section .gallery-container');
         const slider = document.createElement('div');
         slider.className = 'gallery-slider';
@@ -3458,18 +3444,16 @@
         let isDragging = false;
 
         // 渲染项目
-        profile.projects.forEach((project, index) => {
+        galleryProjects.forEach((project, index) => {
             const projectElement = document.createElement('div');
-            projectElement.className = `gallery-item${project.image ? '' : ' no-image'}`;
+            projectElement.className = 'gallery-item';
             projectElement.tabIndex = 0;
             projectElement.setAttribute('role', 'button');
             projectElement.setAttribute('aria-label', `View ${project.name}`);
             projectElement.style.animationDelay = `${index * 0.2}s`;
             
             projectElement.innerHTML = `
-                ${project.image
-                    ? `<img src="${project.image}" alt="${project.name}" class="gallery-image${project.imageFit === 'contain' ? ' gallery-image-contain' : ''}" style="object-fit: ${project.imageFit || 'cover'}">`
-                    : `<div class="project-cover" aria-hidden="true">${project.coverLabel || project.name}</div>`}
+                <img src="${project.image}" alt="${project.name}" class="gallery-image${project.imageFit === 'contain' ? ' gallery-image-contain' : ''}" style="object-fit: ${project.imageFit || 'cover'}">
                 <div class="gallery-content">
                     <h3 class="gallery-title">${project.name}</h3>
                     <p class="gallery-description">${project.description}</p>
@@ -3497,6 +3481,36 @@
             dots.appendChild(dot);
         });
 
+        const projectCards = document.getElementById('project-cards');
+        textProjects.forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'card project-text-card';
+            card.tabIndex = 0;
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `View ${project.name}`);
+            card.innerHTML = `
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">${project.name}</h3>
+                        <div class="card-subtitle">${project.role || ''}</div>
+                    </div>
+                    <span class="card-period">${project.period || ''}</span>
+                </div>
+                <p class="card-description">${project.description}</p>
+                <div class="flex flex-wrap gap-2 mt-4 text-gray-300">
+                    ${(project.tags || []).map(tag => `<span class="gallery-tag">${tag}</span>`).join('')}
+                </div>
+            `;
+            card.addEventListener('click', () => showDetail('project', project));
+            card.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    showDetail('project', project);
+                }
+            });
+            projectCards.appendChild(card);
+        });
+
         // 更新滑块位置
         function updateSlider(animate = true) {
             if (!animate) {
@@ -3522,11 +3536,11 @@
 
         // 下一张幻灯片
         function nextSlide() {
-            goToSlide((currentIndex + 1) % profile.projects.length);
+            goToSlide((currentIndex + 1) % galleryProjects.length);
         }
 
         function prevSlide() {
-            goToSlide((currentIndex - 1 + profile.projects.length) % profile.projects.length);
+            goToSlide((currentIndex - 1 + galleryProjects.length) % galleryProjects.length);
         }
 
         // 添加导航按钮事件监听
