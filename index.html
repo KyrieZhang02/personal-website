@@ -1975,32 +1975,6 @@
         }
     </style>
 <style>
-    #photography-section .film-heading {
-        margin: 0 0 0.75rem;
-        color: #fff;
-        font-size: 1.5rem;
-        font-weight: 700;
-    }
-    #photography-section .film-intro {
-        margin: 0;
-        max-width: 42rem;
-        color: #b8b8bf;
-        line-height: 1.7;
-    }
-    #photography-section .film-toolbar {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        margin: 1.75rem 0 1.25rem;
-    }
-    #photography-section .film-filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-    #photography-section .film-filter,
     .film-lightbox .film-control {
         min-height: 44px;
         padding: 0.65rem 0.95rem;
@@ -2012,27 +1986,14 @@
         cursor: pointer;
         transition: background 160ms ease, border-color 160ms ease;
     }
-    #photography-section .film-filter:hover,
     .film-lightbox .film-control:hover {
         border-color: #fb923c;
         background: #33302d;
     }
-    #photography-section .film-filter[aria-pressed="true"] {
-        border-color: #fb923c;
-        background: #422b1b;
-        color: #fdba74;
-    }
-    #photography-section .film-filter:focus-visible,
     #photography-section .film-photo-button:focus-visible,
     .film-lightbox .film-control:focus-visible {
         outline: 2px solid #fb923c;
         outline-offset: 3px;
-    }
-    #photography-section .film-count {
-        margin: 0;
-        color: #9ca3af;
-        font-size: 0.875rem;
-        white-space: nowrap;
     }
     #photography-section .film-grid {
         display: grid;
@@ -2136,13 +2097,11 @@
     }
     @media (max-width: 600px) {
         #photography-section .film-grid { grid-template-columns: minmax(0, 1fr); }
-        #photography-section .film-toolbar { align-items: flex-start; }
         .film-lightbox .film-lightbox-footer { gap: 0.5rem; }
         .film-lightbox .film-control { padding: 0.65rem 0.75rem; font-size: 0.875rem; }
         .film-lightbox .film-lightbox-caption { font-size: 0.75rem; }
     }
     @media (prefers-reduced-motion: reduce) {
-        #photography-section .film-filter,
         #photography-section .film-photo-button,
         .film-lightbox .film-control { transition: none; }
     }
@@ -2280,18 +2239,7 @@
 
                         <!-- Photography Section -->
 
-                        <section id="photography-section" class="tab-content hidden" aria-labelledby="film-heading">
-    <h2 id="film-heading" class="film-heading">Film Photography</h2>
-    <p class="film-intro">Selected film photographs of people, light, and everyday moments.</p>
-    <div class="film-toolbar">
-        <div class="film-filters" role="group" aria-label="Filter film photographs">
-            <button type="button" class="film-filter" data-film-filter="All" aria-pressed="true">All</button>
-            <button type="button" class="film-filter" data-film-filter="Street" aria-pressed="false">Street</button>
-            <button type="button" class="film-filter" data-film-filter="Architecture" aria-pressed="false">Architecture</button>
-            <button type="button" class="film-filter" data-film-filter="Everyday" aria-pressed="false">Everyday</button>
-        </div>
-        <p id="film-photo-count" class="film-count" aria-live="polite">8 photos</p>
-    </div>
+                        <section id="photography-section" class="tab-content hidden" aria-label="Film photographs">
     <div id="film-photo-grid" class="film-grid"></div>
     <dialog id="film-lightbox" class="film-lightbox" aria-labelledby="film-lightbox-title">
         <div class="film-lightbox-layout">
@@ -4127,10 +4075,7 @@
         "alt": "An adult and child holding hands while looking up at a sculpture"
     }
 ];
-    const filmSection = document.getElementById('photography-section');
     const filmGrid = document.getElementById('film-photo-grid');
-    const filmCount = document.getElementById('film-photo-count');
-    const filmFilters = Array.from(filmSection.querySelectorAll('[data-film-filter]'));
     const filmDialog = document.getElementById('film-lightbox');
     const filmStage = document.getElementById('film-lightbox-stage');
     const filmDialogCount = document.getElementById('film-lightbox-count');
@@ -4139,12 +4084,10 @@
     const filmPrevious = document.getElementById('film-previous');
     const filmNext = document.getElementById('film-next');
     const filmSvgNamespace = 'http://www.w3.org/2000/svg';
-    let filmVisiblePhotos = filmPhotos.slice();
+    const filmVisiblePhotos = filmPhotos;
     let filmCurrentIndex = 0;
     let filmOpener = null;
     let filmPreviousOverflow = '';
-
-    const filmCategoryKey = value => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
 
     function filmCreateMedia(photo, source, isPreview) {
         const filmWidth = Math.max(1, Number(photo.width) || 1);
@@ -4211,15 +4154,8 @@
         filmShowCurrent();
     }
 
-    function filmRenderGallery(filter) {
-        const filmFilterKey = filmCategoryKey(filter);
-        filmVisiblePhotos = filmFilterKey === 'all'
-            ? filmPhotos.slice()
-            : filmPhotos.filter(photo => filmCategoryKey(photo.category) === filmFilterKey);
+    function filmRenderGallery() {
         filmGrid.replaceChildren();
-        filmCount.textContent = filmVisiblePhotos.length === filmPhotos.length
-            ? filmPhotos.length + ' photos'
-            : filmVisiblePhotos.length + ' of ' + filmPhotos.length + ' photos';
 
         filmVisiblePhotos.forEach((photo, index) => {
             const filmButton = document.createElement('button');
@@ -4234,17 +4170,11 @@
         if (!filmVisiblePhotos.length) {
             const filmEmpty = document.createElement('p');
             filmEmpty.className = 'film-empty';
-            filmEmpty.textContent = 'No photographs in this category.';
+            filmEmpty.textContent = 'No photographs yet.';
             filmGrid.appendChild(filmEmpty);
         }
     }
 
-    filmFilters.forEach(button => {
-        button.addEventListener('click', () => {
-            filmFilters.forEach(filter => filter.setAttribute('aria-pressed', String(filter === button)));
-            filmRenderGallery(button.dataset.filmFilter);
-        });
-    });
     filmClose.addEventListener('click', () => filmDialog.close());
     filmPrevious.addEventListener('click', () => filmMove(-1));
     filmNext.addEventListener('click', () => filmMove(1));
@@ -4262,7 +4192,7 @@
         filmStage.replaceChildren();
         if (filmOpener && filmOpener.isConnected) filmOpener.focus({ preventScroll: true });
     });
-    filmRenderGallery('All');
+    filmRenderGallery();
 })();
 </script>
 </body>
