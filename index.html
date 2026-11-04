@@ -1974,6 +1974,179 @@
             *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
     </style>
+<style>
+    #photography-section .film-heading {
+        margin: 0 0 0.75rem;
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    #photography-section .film-intro {
+        margin: 0;
+        max-width: 42rem;
+        color: #b8b8bf;
+        line-height: 1.7;
+    }
+    #photography-section .film-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 1.75rem 0 1.25rem;
+    }
+    #photography-section .film-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    #photography-section .film-filter,
+    .film-lightbox .film-control {
+        min-height: 44px;
+        padding: 0.65rem 0.95rem;
+        border: 1px solid #424247;
+        border-radius: 0.65rem;
+        background: #262626;
+        color: #e5e7eb;
+        font: inherit;
+        cursor: pointer;
+        transition: background 160ms ease, border-color 160ms ease;
+    }
+    #photography-section .film-filter:hover,
+    .film-lightbox .film-control:hover {
+        border-color: #fb923c;
+        background: #33302d;
+    }
+    #photography-section .film-filter[aria-pressed="true"] {
+        border-color: #fb923c;
+        background: #422b1b;
+        color: #fdba74;
+    }
+    #photography-section .film-filter:focus-visible,
+    #photography-section .film-photo-button:focus-visible,
+    .film-lightbox .film-control:focus-visible {
+        outline: 2px solid #fb923c;
+        outline-offset: 3px;
+    }
+    #photography-section .film-count {
+        margin: 0;
+        color: #9ca3af;
+        font-size: 0.875rem;
+        white-space: nowrap;
+    }
+    #photography-section .film-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+    #photography-section .film-photo-button {
+        position: relative;
+        display: block;
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #343438;
+        border-radius: 0.75rem;
+        background: #111;
+        cursor: zoom-in;
+        transition: border-color 160ms ease;
+    }
+    #photography-section .film-photo-button:hover {
+        border-color: #fb923c;
+    }
+    #photography-section .film-media,
+    .film-lightbox .film-media {
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        object-fit: contain;
+    }
+    #photography-section .film-empty {
+        grid-column: 1 / -1;
+        margin: 2rem 0;
+        color: #9ca3af;
+    }
+    dialog.film-lightbox {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        max-width: none;
+        max-height: none;
+        box-sizing: border-box;
+        margin: 0;
+        padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+        overflow: hidden;
+        border: 0;
+        background: #0a0a0a;
+        color: #e5e7eb;
+    }
+    dialog.film-lightbox::backdrop { background: #0a0a0a; }
+    .film-lightbox .film-lightbox-layout {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        gap: 1rem;
+        width: 100%;
+        height: 100%;
+        max-width: 1800px;
+        margin: 0 auto;
+    }
+    .film-lightbox .film-lightbox-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .film-lightbox .film-lightbox-title {
+        margin: 0;
+        color: #e5e7eb;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    .film-lightbox .film-lightbox-stage {
+        min-width: 0;
+        min-height: 0;
+        overflow: hidden;
+    }
+    .film-lightbox .film-lightbox-footer {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 1rem;
+    }
+    .film-lightbox .film-lightbox-caption {
+        margin: 0;
+        color: #b8b8bf;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+    .film-lightbox .film-lightbox-count {
+        display: block;
+        margin-bottom: 0.25rem;
+        color: #fdba74;
+        font-variant-numeric: tabular-nums;
+    }
+    @media (max-width: 1000px) {
+        #photography-section .film-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+        #photography-section .film-grid { grid-template-columns: minmax(0, 1fr); }
+        #photography-section .film-toolbar { align-items: flex-start; }
+        .film-lightbox .film-lightbox-footer { gap: 0.5rem; }
+        .film-lightbox .film-control { padding: 0.65rem 0.75rem; font-size: 0.875rem; }
+        .film-lightbox .film-lightbox-caption { font-size: 0.75rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        #photography-section .film-filter,
+        #photography-section .film-photo-button,
+        .film-lightbox .film-control { transition: none; }
+    }
+</style>
 </head>
 <body class="min-h-screen bg-[#0a0a0a]">
     <div class="min-h-screen flex items-stretch p-6">
@@ -2033,6 +2206,7 @@
                         <button class="flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap text-gray-400 hover:text-gray-200" data-tab="competition">Awards</button>
                         <button class="flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap text-gray-400 hover:text-gray-200" data-tab="activity">Experience</button>
                         <button class="flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap text-gray-400 hover:text-gray-200" data-tab="certificate">Certificate</button>
+                        <button class="flex-1 px-4 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap text-gray-400 hover:text-gray-200" data-tab="photography">Photography</button>
                     </nav>
 
                     <div class="flex-1 overflow-y-auto pr-4">
@@ -2103,6 +2277,40 @@
                                 <!-- Certificate items will be added here -->
                             </div>
                         </section>
+
+                        <!-- Photography Section -->
+
+                        <section id="photography-section" class="tab-content hidden" aria-labelledby="film-heading">
+    <h2 id="film-heading" class="film-heading">Film Photography</h2>
+    <p class="film-intro">Selected film photographs of people, light, and everyday moments.</p>
+    <div class="film-toolbar">
+        <div class="film-filters" role="group" aria-label="Filter film photographs">
+            <button type="button" class="film-filter" data-film-filter="All" aria-pressed="true">All</button>
+            <button type="button" class="film-filter" data-film-filter="Street" aria-pressed="false">Street</button>
+            <button type="button" class="film-filter" data-film-filter="Architecture" aria-pressed="false">Architecture</button>
+            <button type="button" class="film-filter" data-film-filter="Everyday" aria-pressed="false">Everyday</button>
+        </div>
+        <p id="film-photo-count" class="film-count" aria-live="polite">8 photos</p>
+    </div>
+    <div id="film-photo-grid" class="film-grid"></div>
+    <dialog id="film-lightbox" class="film-lightbox" aria-labelledby="film-lightbox-title">
+        <div class="film-lightbox-layout">
+            <div class="film-lightbox-header">
+                <h3 id="film-lightbox-title" class="film-lightbox-title">Film Photography</h3>
+                <button id="film-close" type="button" class="film-control" autofocus>Close <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div id="film-lightbox-stage" class="film-lightbox-stage"></div>
+            <div class="film-lightbox-footer">
+                <button id="film-previous" type="button" class="film-control" aria-label="Previous photograph"><span aria-hidden="true">&larr;</span> Previous</button>
+                <p class="film-lightbox-caption">
+                    <span id="film-lightbox-count" class="film-lightbox-count" aria-live="polite"></span>
+                    <span id="film-lightbox-caption"></span>
+                </p>
+                <button id="film-next" type="button" class="film-control" aria-label="Next photograph">Next <span aria-hidden="true">&rarr;</span></button>
+            </div>
+        </div>
+    </dialog>
+</section>
 
                         <!-- Detail View Section -->
                         <section id="detail-section" class="tab-content hidden">
@@ -3834,6 +4042,229 @@
             certificateAutoplayInterval = setInterval(nextCertificateSlide, 5000);
         });
     </script>
+<script>
+(() => {
+    'use strict';
+    const filmPhotos = [
+    {
+        "id": "F057",
+        "src": "images/photography-f057.jpg",
+        "thumb": "images/photography-f057-thumb.jpg",
+        "width": 2400,
+        "height": 1592,
+        "rotation": 0,
+        "category": "Street",
+        "alt": "A street saxophonist with a small dog and a loaded bicycle"
+    },
+    {
+        "id": "F286",
+        "src": "images/photography-f286.jpg",
+        "thumb": "images/photography-f286-thumb.jpg",
+        "width": 2400,
+        "height": 1591,
+        "rotation": 0,
+        "category": "Street",
+        "alt": "Sunlight filtering through trees above people on a descending stairway"
+    },
+    {
+        "id": "F218",
+        "src": "images/photography-f218.jpg",
+        "thumb": "images/photography-f218-thumb.jpg",
+        "width": 2400,
+        "height": 1592,
+        "rotation": 0,
+        "category": "Everyday",
+        "alt": "A white round table and red chairs seen from above"
+    },
+    {
+        "id": "F046",
+        "src": "images/photography-f046.jpg",
+        "thumb": "images/photography-f046-thumb.jpg",
+        "width": 2400,
+        "height": 1592,
+        "rotation": 0,
+        "category": "Architecture",
+        "alt": "A building corner rising into a blue sky with white clouds"
+    },
+    {
+        "id": "F088",
+        "src": "images/photography-f088.jpg",
+        "thumb": "images/photography-f088-thumb.jpg",
+        "width": 1592,
+        "height": 2400,
+        "rotation": 0,
+        "category": "Architecture",
+        "alt": "A brick doorway framing a tree-lined path and colonnade"
+    },
+    {
+        "id": "F411",
+        "src": "images/photography-f411.jpg",
+        "thumb": "images/photography-f411-thumb.jpg",
+        "width": 2400,
+        "height": 1592,
+        "rotation": 0,
+        "category": "Everyday",
+        "alt": "A black-and-white portrait of a person adjusting their collar in a doorway"
+    },
+    {
+        "id": "F181",
+        "src": "images/photography-f181.jpg",
+        "thumb": "images/photography-f181-thumb.jpg",
+        "width": 2400,
+        "height": 1592,
+        "rotation": 0,
+        "category": "Everyday",
+        "alt": "Orange fireworks above the silhouette of a spectator"
+    },
+    {
+        "id": "F076",
+        "src": "images/photography-f076.jpg",
+        "thumb": "images/photography-f076-thumb.jpg",
+        "width": 2400,
+        "height": 1592,
+        "rotation": 0,
+        "category": "Everyday",
+        "alt": "An adult and child holding hands while looking up at a sculpture"
+    }
+];
+    const filmSection = document.getElementById('photography-section');
+    const filmGrid = document.getElementById('film-photo-grid');
+    const filmCount = document.getElementById('film-photo-count');
+    const filmFilters = Array.from(filmSection.querySelectorAll('[data-film-filter]'));
+    const filmDialog = document.getElementById('film-lightbox');
+    const filmStage = document.getElementById('film-lightbox-stage');
+    const filmDialogCount = document.getElementById('film-lightbox-count');
+    const filmCaption = document.getElementById('film-lightbox-caption');
+    const filmClose = document.getElementById('film-close');
+    const filmPrevious = document.getElementById('film-previous');
+    const filmNext = document.getElementById('film-next');
+    const filmSvgNamespace = 'http://www.w3.org/2000/svg';
+    let filmVisiblePhotos = filmPhotos.slice();
+    let filmCurrentIndex = 0;
+    let filmOpener = null;
+    let filmPreviousOverflow = '';
+
+    const filmCategoryKey = value => String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+
+    function filmCreateMedia(photo, source, isPreview) {
+        const filmWidth = Math.max(1, Number(photo.width) || 1);
+        const filmHeight = Math.max(1, Number(photo.height) || 1);
+        const filmAlt = photo.alt || 'Film photograph';
+
+        if (Number(photo.rotation) === -90) {
+            const filmSvg = document.createElementNS(filmSvgNamespace, 'svg');
+            filmSvg.setAttribute('viewBox', '0 0 ' + filmHeight + ' ' + filmWidth);
+            filmSvg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+            filmSvg.setAttribute('class', 'film-media');
+            if (isPreview) {
+                filmSvg.setAttribute('aria-hidden', 'true');
+            } else {
+                filmSvg.setAttribute('role', 'img');
+                filmSvg.setAttribute('aria-label', filmAlt);
+            }
+            const filmImage = document.createElementNS(filmSvgNamespace, 'image');
+            filmImage.setAttribute('href', source);
+            filmImage.setAttribute('width', String(filmWidth));
+            filmImage.setAttribute('height', String(filmHeight));
+            filmImage.setAttribute('transform', 'translate(0 ' + filmWidth + ') rotate(-90)');
+            filmSvg.appendChild(filmImage);
+            return filmSvg;
+        }
+
+        const filmImage = document.createElement('img');
+        filmImage.className = 'film-media';
+        filmImage.src = source;
+        filmImage.alt = isPreview ? '' : filmAlt;
+        filmImage.width = filmWidth;
+        filmImage.height = filmHeight;
+        filmImage.decoding = 'async';
+        filmImage.draggable = false;
+        if (isPreview) filmImage.loading = 'lazy';
+        return filmImage;
+    }
+
+    function filmShowCurrent() {
+        if (!filmVisiblePhotos.length) return;
+        const filmPhoto = filmVisiblePhotos[filmCurrentIndex];
+        filmStage.replaceChildren(filmCreateMedia(filmPhoto, filmPhoto.src, false));
+        filmDialogCount.textContent = (filmCurrentIndex + 1) + ' / ' + filmVisiblePhotos.length;
+        filmCaption.textContent = filmPhoto.alt || '';
+        filmPrevious.disabled = filmVisiblePhotos.length < 2;
+        filmNext.disabled = filmVisiblePhotos.length < 2;
+    }
+
+    function filmOpen(index, opener) {
+        filmCurrentIndex = index;
+        filmOpener = opener;
+        filmShowCurrent();
+        if (!filmDialog.open) {
+            filmPreviousOverflow = document.documentElement.style.overflow;
+            filmDialog.showModal();
+            document.documentElement.style.overflow = 'hidden';
+            filmClose.focus();
+        }
+    }
+
+    function filmMove(direction) {
+        if (!filmVisiblePhotos.length) return;
+        filmCurrentIndex = (filmCurrentIndex + direction + filmVisiblePhotos.length) % filmVisiblePhotos.length;
+        filmShowCurrent();
+    }
+
+    function filmRenderGallery(filter) {
+        const filmFilterKey = filmCategoryKey(filter);
+        filmVisiblePhotos = filmFilterKey === 'all'
+            ? filmPhotos.slice()
+            : filmPhotos.filter(photo => filmCategoryKey(photo.category) === filmFilterKey);
+        filmGrid.replaceChildren();
+        filmCount.textContent = filmVisiblePhotos.length === filmPhotos.length
+            ? filmPhotos.length + ' photos'
+            : filmVisiblePhotos.length + ' of ' + filmPhotos.length + ' photos';
+
+        filmVisiblePhotos.forEach((photo, index) => {
+            const filmButton = document.createElement('button');
+            filmButton.type = 'button';
+            filmButton.className = 'film-photo-button';
+            filmButton.setAttribute('aria-label', 'Open photograph ' + (index + 1) + ': ' + (photo.alt || 'Film photograph'));
+            filmButton.appendChild(filmCreateMedia(photo, photo.thumb || photo.src, true));
+            filmButton.addEventListener('click', () => filmOpen(index, filmButton));
+            filmGrid.appendChild(filmButton);
+        });
+
+        if (!filmVisiblePhotos.length) {
+            const filmEmpty = document.createElement('p');
+            filmEmpty.className = 'film-empty';
+            filmEmpty.textContent = 'No photographs in this category.';
+            filmGrid.appendChild(filmEmpty);
+        }
+    }
+
+    filmFilters.forEach(button => {
+        button.addEventListener('click', () => {
+            filmFilters.forEach(filter => filter.setAttribute('aria-pressed', String(filter === button)));
+            filmRenderGallery(button.dataset.filmFilter);
+        });
+    });
+    filmClose.addEventListener('click', () => filmDialog.close());
+    filmPrevious.addEventListener('click', () => filmMove(-1));
+    filmNext.addEventListener('click', () => filmMove(1));
+    filmDialog.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+            event.preventDefault();
+            filmMove(event.key === 'ArrowLeft' ? -1 : 1);
+        } else if (event.key === 'Escape') {
+            event.preventDefault();
+            filmDialog.close();
+        }
+    });
+    filmDialog.addEventListener('close', () => {
+        document.documentElement.style.overflow = filmPreviousOverflow;
+        filmStage.replaceChildren();
+        if (filmOpener && filmOpener.isConnected) filmOpener.focus({ preventScroll: true });
+    });
+    filmRenderGallery('All');
+})();
+</script>
 </body>
 </html>
 
